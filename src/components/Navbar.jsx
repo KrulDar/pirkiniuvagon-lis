@@ -9,10 +9,7 @@ export default function Navbar({ lists, selectedListId, onSelectList, onManageLi
             justifyContent: 'space-between',
             padding: '0.75rem 1rem',
             borderRadius: 'var(--radius-lg)',
-            marginBottom: '1.5rem',
-            position: 'sticky',
-            top: '1rem',
-            zIndex: 100
+            marginBottom: '1.5rem'
         }}>
             <div style={{ flex: 1 }}>
                 <ListSelector
