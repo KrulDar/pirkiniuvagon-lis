@@ -482,16 +482,18 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                                 bottom: '100%',
                                 right: 0,
                                 marginBottom: '0.5rem',
-                                backgroundColor: 'var(--color-bg-card)',
-                                border: '1px solid var(--color-border)',
+                                backgroundColor: 'hsl(var(--color-primary) / 0.95)',
+                                border: '2px solid var(--color-primary)',
                                 borderRadius: 'var(--radius-md)',
-                                padding: '0.75rem',
-                                boxShadow: 'var(--shadow-lg)',
+                                padding: '0.75rem 1rem',
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                                 minWidth: '200px',
                                 maxWidth: '300px',
                                 zIndex: 10,
-                                fontSize: '0.9rem',
-                                color: 'var(--color-text-main)'
+                                fontSize: '0.95rem',
+                                color: 'white',
+                                fontWeight: '500',
+                                lineHeight: '1.4'
                             }}
                         >
                             {item.comment}
@@ -501,9 +503,18 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                                     position: 'absolute',
                                     top: '0.25rem',
                                     right: '0.25rem',
-                                    padding: '0.1rem 0.3rem',
-                                    fontSize: '0.7rem',
-                                    opacity: 0.5
+                                    background: 'rgba(255, 255, 255, 0.2)',
+                                    border: 'none',
+                                    borderRadius: '50%',
+                                    width: '20px',
+                                    height: '20px',
+                                    cursor: 'pointer',
+                                    fontSize: '0.75rem',
+                                    color: 'white',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontWeight: 'bold'
                                 }}
                             >
                                 ✕
