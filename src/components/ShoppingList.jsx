@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { useListItems } from '../hooks/useListItems'
 import CategoryManager from './CategoryManager'
@@ -10,6 +10,30 @@ export default function ShoppingList({ listId }) {
     const [searchQuery, setSearchQuery] = useState('')
     const [showCheckedOnly, setShowCheckedOnly] = useState(false)
     const [showCatManager, setShowCatManager] = useState(false)
+
+    // Collapsed categories state (persisted in localStorage)
+    const [collapsedCategories, setCollapsedCategories] = useState(() => {
+        const saved = localStorage.getItem('collapsedCategories')
+        return saved ? new Set(JSON.parse(saved)) : new Set()
+    })
+
+    // Save collapsed state to localStorage
+    useEffect(() => {
+        localStorage.setItem('collapsedCategories', JSON.stringify([...collapsedCategories]))
+    }, [collapsedCategories])
+
+    // Toggle category collapse
+    const toggleCategory = (categoryId) => {
+        setCollapsedCategories(prev => {
+            const newSet = new Set(prev)
+            if (newSet.has(categoryId)) {
+                newSet.delete(categoryId)
+            } else {
+                newSet.add(categoryId)
+            }
+            return newSet
+        })
+    }
 
     // Add Item State
     const [isAdding, setIsAdding] = useState(false)
@@ -232,29 +256,50 @@ export default function ShoppingList({ listId }) {
                 const catItems = itemsByCat[cat.id] || []
                 if (catItems.length === 0) return null
 
+                const isCollapsed = collapsedCategories.has(cat.id)
+                const itemCount = catItems.length
+
                 return (
                     <div key={cat.id} className="category-group" style={{ marginBottom: '1.5rem' }}>
-                        <h3 style={{
-                            fontSize: '1.1rem',
-                            color: 'var(--color-primary)',
-                            borderBottom: '2px solid var(--color-border)',
-                            paddingBottom: '0.25rem',
-                            marginBottom: '0.5rem'
-                        }}>
+                        <h3
+                            onClick={() => toggleCategory(cat.id)}
+                            style={{
+                                fontSize: '1.1rem',
+                                color: 'var(--color-primary)',
+                                borderBottom: '2px solid var(--color-border)',
+                                paddingBottom: '0.25rem',
+                                marginBottom: '0.5rem',
+                                cursor: 'pointer',
+                                userSelect: 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem'
+                            }}
+                        >
+                            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>
+                                {isCollapsed ? '▶' : '▼'}
+                            </span>
                             {cat.name}
+                            {isCollapsed && (
+                                <span style={{ fontSize: '0.85rem', opacity: 0.6, fontWeight: 'normal' }}>
+                                    ({itemCount} {itemCount === 1 ? 'item' : 'items'})
+                                </span>
+                            )}
                         </h3>
-                        <div className="items-grid" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {catItems.map(item => (
-                                <ItemRow
-                                    key={item.id}
-                                    item={item}
-                                    categories={categories}
-                                    onToggle={() => toggleCheck(item)}
-                                    onUpdate={updateItem}
-                                    onDelete={() => deleteItem(item.id)}
-                                />
-                            ))}
-                        </div>
+                        {!isCollapsed && (
+                            <div className="items-grid" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                {catItems.map(item => (
+                                    <ItemRow
+                                        key={item.id}
+                                        item={item}
+                                        categories={categories}
+                                        onToggle={() => toggleCheck(item)}
+                                        onUpdate={updateItem}
+                                        onDelete={() => deleteItem(item.id)}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )
             })}

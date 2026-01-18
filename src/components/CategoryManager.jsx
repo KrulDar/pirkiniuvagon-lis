@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
-export default function CategoryManager({ categories, onClose }) {
+export default function CategoryManager({ categories: initialCategories, onClose }) {
+    const [categories, setCategories] = useState(initialCategories)
     const [newCatName, setNewCatName] = useState('')
     const [editingId, setEditingId] = useState(null)
     const [editName, setEditName] = useState('')
+
+    // Update local state when prop changes (from real-time updates)
+    useEffect(() => {
+        setCategories(initialCategories)
+    }, [initialCategories])
 
     const addCategory = async (e) => {
         e.preventDefault()
@@ -53,25 +59,25 @@ export default function CategoryManager({ categories, onClose }) {
         const otherIndex = direction === 'up' ? index - 1 : index + 1
         if (otherIndex < 0 || otherIndex >= categories.length) return
 
+        // Optimistic update - swap immediately in local state
+        const newCategories = [...categories]
+        const temp = newCategories[index]
+        newCategories[index] = newCategories[otherIndex]
+        newCategories[otherIndex] = temp
+        setCategories(newCategories)
+
         const current = categories[index]
         const other = categories[otherIndex]
 
-        // Swap functionality
-        // We need to ensure they have distinct sort_orders. 
-        // If sort_order is null, we assume index based sort.
-        // Let's just swap their sort_order values.
-        // Note: data fetched is already sorted by sort_order.
+        let currentOrder = current.sort_order ?? index * 10
+        let otherOrder = other.sort_order ?? otherIndex * 10
 
-        let currentOrder = current.sort_order || index * 10
-        let otherOrder = other.sort_order || otherIndex * 10
-
-        // If they happen to be equal (e.g. both null or collision), fix it
         if (currentOrder === otherOrder) {
             currentOrder = index * 10
             otherOrder = otherIndex * 10
         }
 
-        // Perform swap
+        // Perform swap in database
         const { error: error1 } = await supabase
             .from('categories')
             .update({ sort_order: otherOrder })
@@ -79,6 +85,8 @@ export default function CategoryManager({ categories, onClose }) {
 
         if (error1) {
             console.error('Error moving category:', error1)
+            // Revert optimistic update on error
+            setCategories(categories)
             return
         }
 
@@ -87,7 +95,11 @@ export default function CategoryManager({ categories, onClose }) {
             .update({ sort_order: currentOrder })
             .eq('id', other.id)
 
-        if (error2) console.error('Error moving category (partner):', error2)
+        if (error2) {
+            console.error('Error moving category (partner):', error2)
+            // Revert optimistic update on error
+            setCategories(categories)
+        }
     }
 
     return (
