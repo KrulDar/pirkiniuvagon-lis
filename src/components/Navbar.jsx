@@ -1,4 +1,3 @@
-import ListSelector from './ListSelector'
 import SettingsMenu from './SettingsMenu'
 
 export default function Navbar({ lists, selectedListId, onSelectList, onManageLists, profile, role }) {
@@ -11,23 +10,22 @@ export default function Navbar({ lists, selectedListId, onSelectList, onManageLi
             borderRadius: 'var(--radius-lg)',
             marginBottom: '1.5rem'
         }}>
-            <div style={{ flex: 1 }}>
-                <ListSelector
-                    lists={lists}
-                    selectedListId={selectedListId}
-                    onSelect={onSelectList}
-                    onManageLists={onManageLists}
-                />
-            </div>
-
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-primary)' }}>
-                    🛒 Shopping List
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ fontSize: '1.5rem' }}>🛒</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-primary)', lineHeight: 1.2 }}>
+                    Shopping<br />List
                 </div>
             </div>
 
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-                <SettingsMenu profile={profile} role={role} />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <SettingsMenu
+                    profile={profile}
+                    role={role}
+                    lists={lists}
+                    selectedListId={selectedListId}
+                    onSelectList={onSelectList}
+                    onManageLists={onManageLists}
+                />
             </div>
         </nav>
     )

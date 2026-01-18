@@ -1,14 +1,16 @@
 :root {
   /* HSL Color Palette */
-  --color-primary: 256 100% 65%;
-  /* Vibrant Purple */
-  --color-primary-dark: 256 100% 55%;
+  --color-primary: 216 98% 52%;
+  /* Deep Royal Blue */
+  --color-primary-dark: 216 98% 45%;
   --color-secondary: 170 100% 40%;
   /* Teal */
 
   --color-bg-body: 220 15% 96%;
   /* Light Blueish Gray */
   --color-bg-card: 0 0% 100%;
+  --color-bg-selected: 220 15% 92%;
+  /* Slightly darker than card for selected state */
 
   --color-text-main: 220 15% 15%;
   --color-text-muted: 220 10% 45%;
@@ -44,14 +46,79 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Custom Checkbox Styles - iOS Notes Style */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  padding: 0 !important;
+  /* Fix ellipse issue */
+  margin: 0 !important;
+  border-radius: 50%;
+  border: 1.5px solid #C7C7CC;
+  /* iOS Standard Grey */
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  opacity: 1;
+  /* Reset opacity */
+}
+
+input[type="checkbox"]:checked {
+  background-color: hsl(var(--color-primary));
+  border-color: hsl(var(--color-primary));
+  border-width: 0;
+  /* Remove border for cleaner look */
+}
+
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 48%;
+  /* Slight optical adjustment */
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  margin-top: -1px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg-body: 220 15% 10%;
     --color-bg-card: 220 15% 15%;
+    --color-bg-selected: 220 15% 12%;
+    /* Darker than card */
     --color-text-main: 220 15% 90%;
     --color-text-muted: 220 10% 65%;
     --color-border: 220 15% 20%;
   }
+}
+
+[data-theme="dark"] {
+  --color-bg-body: 220 15% 10%;
+  --color-bg-card: 220 15% 15%;
+  --color-bg-selected: 220 15% 12%;
+  /* Darker than card */
+  --color-text-main: 220 15% 90%;
+  --color-text-muted: 220 10% 65%;
+  --color-border: 220 15% 20%;
+}
+
+[data-theme="light"] {
+  --color-bg-body: 220 15% 96%;
+  --color-bg-card: 0 0% 100%;
+  --color-bg-selected: 220 15% 92%;
+  --color-text-main: 220 15% 15%;
+  --color-text-muted: 220 10% 45%;
+  --color-border: 220 15% 90%;
 }
 
 * {

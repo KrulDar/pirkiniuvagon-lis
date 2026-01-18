@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { useListItems } from '../hooks/useListItems'
 import CategoryManager from './CategoryManager'
@@ -144,58 +144,70 @@ export default function ShoppingList({ listId }) {
         <div className="shopping-list">
             {/* Controls */}
             <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
-                <div className="flex gap-4" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <input
-                        type="text"
-                        placeholder="Search items..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ flex: 1, minWidth: '200px' }}
-                    />
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <button
-                            onClick={() => setShowCheckedOnly(!showCheckedOnly)}
-                            style={{
-                                backgroundColor: showCheckedOnly ? 'var(--color-primary)' : 'var(--color-bg-card)',
-                                color: showCheckedOnly ? 'white' : 'var(--color-text-main)',
-                                border: '1px solid var(--color-border)',
-                                whiteSpace: 'nowrap',
-                                fontSize: '0.9rem',
-                                padding: '0.6rem 1rem'
-                            }}
-                        >
-                            {showCheckedOnly ? 'Show All' : 'Show Checked'}
-                        </button>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
 
-                        <button
-                            onClick={() => setShowCatManager(!showCatManager)}
-                            style={{
-                                whiteSpace: 'nowrap',
-                                fontSize: '0.9rem',
-                                padding: '0.6rem 1rem'
-                            }}
-                        >
-                            Cats {showCatManager ? '▲' : '▼'}
-                        </button>
+                    {/* Filter Button */}
+                    {/* Filter Button */}
+                    <button
+                        onClick={() => setShowCheckedOnly(!showCheckedOnly)}
+                        style={{
+                            minWidth: showCheckedOnly ? 'auto' : '44px',
+                            minHeight: '44px',
+                            padding: showCheckedOnly ? '0 1rem' : 0,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.5rem',
+                            backgroundColor: showCheckedOnly ? 'hsl(var(--color-primary))' : 'var(--color-bg-card)',
+                            color: showCheckedOnly ? 'white' : 'var(--color-text-main)',
+                            border: '1px solid var(--color-border)',
+                            fontSize: '1.2rem',
+                            flexShrink: 0
+                        }}
+                        title={showCheckedOnly ? "Show All items" : "Show only Checked items"}
+                    >
+                        {/* Filter Icon */}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
 
-                        <button
-                            className="primary"
-                            onClick={() => setIsAdding(!isAdding)}
+                        {/* Selected Items Label (Only shows when active to save space? Or always? User asked to put it near. Let's show it always if space permits, or better yet, make the button expand when active) */}
+                        <span style={{ fontSize: '0.9rem', fontWeight: 500, display: showCheckedOnly ? 'inline' : 'none' }}>Selected items</span>
+                    </button>
+
+                    {/* Search Bar */}
+                    <div style={{ flex: 1, position: 'relative' }}>
+                        <input
+                            type="text"
+                            placeholder="Search items..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             style={{
-                                whiteSpace: 'nowrap',
-                                fontSize: '0.9rem',
-                                padding: '0.6rem 1rem'
+                                width: '100%',
+                                minHeight: '44px',
+                                paddingLeft: '2.5rem'
                             }}
-                        >
-                            {isAdding ? 'Cancel' : 'Add +'}
-                        </button>
+                        />
+                        <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔍</span>
                     </div>
+
+                    {/* Plus / Menu Button */}
+                    <PlusMenu
+                        isAdding={isAdding}
+                        setIsAdding={setIsAdding}
+                        showCatManager={showCatManager}
+                        setShowCatManager={setShowCatManager}
+                    />
                 </div>
 
                 {/* Category Manager */}
-                {showCatManager && (
-                    <div style={{ marginTop: '1rem' }}>
-                        <CategoryManager categories={categories} onClose={() => setShowCatManager(false)} />
+                {showCatManager && !isAdding && (
+                    <div style={{ marginTop: '1rem', borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <h3 style={{ fontSize: '1rem' }}>Manage Categories</h3>
+                            <button onClick={() => setShowCatManager(false)} style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem' }}>Close</button>
+                        </div>
+                        <CategoryManager categories={categories} onClose={() => { }} />
                     </div>
                 )}
 
@@ -247,7 +259,7 @@ export default function ShoppingList({ listId }) {
                                 style={{ width: '100%' }}
                             />
                         </div>
-                        <button type="submit" className="primary" style={{ height: '38px' }}>Add</button>
+                        <button type="submit" className="primary" style={{ height: '38px', minWidth: '80px' }}>Add</button>
                     </form>
                 )}
             </div>
@@ -332,6 +344,86 @@ export default function ShoppingList({ listId }) {
             {items.length > 0 && filteredItems.length === 0 && !loading && (
                 <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>
                     <p>No items match your filters.</p>
+                </div>
+            )}
+        </div>
+    )
+}
+
+function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const menuRef = useRef(null)
+
+    // Close on click outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [menuRef])
+
+    return (
+        <div style={{ position: 'relative' }} ref={menuRef}>
+            <button
+                className="primary"
+                onClick={() => {
+                    if (isAdding) {
+                        setIsAdding(false)
+                    } else {
+                        setIsOpen(!isOpen)
+                    }
+                }}
+                style={{
+                    minWidth: '44px',
+                    minHeight: '44px',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.5rem',
+                    lineHeight: 1
+                }}
+                title={isAdding ? "Cancel" : "Add or Manage"}
+            >
+                {isAdding ? '✕' : '+'}
+            </button>
+
+            {isOpen && !isAdding && (
+                <div className="card" style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: '0.5rem',
+                    padding: '0.5rem',
+                    zIndex: 20,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem',
+                    minWidth: '180px',
+                    boxShadow: 'var(--shadow-lg)'
+                }}>
+                    <button
+                        onClick={() => {
+                            setIsAdding(true)
+                            setIsOpen(false)
+                            if (showCatManager) setShowCatManager(false)
+                        }}
+                        style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                    >
+                        <span style={{ fontSize: '1.2rem' }}>➕</span> Add Item
+                    </button>
+                    <button
+                        onClick={() => {
+                            setShowCatManager(!showCatManager)
+                            setIsOpen(false)
+                        }}
+                        style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                    >
+                        <span style={{ fontSize: '1.2rem' }}>📂</span> {showCatManager ? 'Hide Categories' : 'Manage Categories'}
+                    </button>
                 </div>
             )}
         </div>
@@ -444,7 +536,17 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
     }
 
     return (
-        <div className="item-row card" style={{ padding: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div
+            className="item-row card"
+            style={{
+                padding: '0.75rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                backgroundColor: item.checked ? 'hsl(var(--color-bg-selected))' : 'var(--color-bg-card)',
+                transition: 'background-color 0.2s',
+            }}
+        >
             <input
                 type="checkbox"
                 checked={item.checked}
@@ -452,7 +554,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                 style={{ width: '1.25rem', height: '1.25rem', accentColor: 'var(--color-primary)', cursor: 'pointer' }}
             />
 
-            <div style={{ flex: 1, opacity: item.checked ? 0.6 : 1, transition: 'opacity 0.2s' }}>
+            <div style={{ flex: 1 }}> {/* Removed opacity change */}
                 <div style={{ fontWeight: 500 }}>
                     {item.name}
                 </div>
