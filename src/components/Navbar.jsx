@@ -12,8 +12,8 @@ export default function Navbar({ lists, selectedListId, onSelectList, onManageLi
         }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div style={{ fontSize: '1.5rem' }}>🛒</div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-primary)', lineHeight: 1.2 }}>
-                    Shopping<br />List
+                <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-primary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    Shopping List
                 </div>
             </div>
 
