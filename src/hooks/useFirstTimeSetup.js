@@ -15,11 +15,13 @@ export function useFirstTimeSetup(profile, onComplete) {
         const setupDefaultList = async () => {
             try {
                 // Check if user has already been set up or setup is in progress
-                if (profile.initial_setup_completed || isSetupInProgress.current) {
+                // Also check sessionStorage to prevent loop within same session if DB update fails
+                if (profile.initial_setup_completed || isSetupInProgress.current || sessionStorage.getItem('setup_attempted')) {
                     return;
                 }
 
                 isSetupInProgress.current = true;
+                sessionStorage.setItem('setup_attempted', 'true');
 
                 console.log('🎁 First time user detected, creating default list...');
 
@@ -41,7 +43,7 @@ export function useFirstTimeSetup(profile, onComplete) {
                     .single();
 
                 if (listError) {
-                    console.error('Error creating default list:', listError);
+                    console.error('Error creating default list:', JSON.stringify(listError));
                     return;
                 }
 
@@ -65,7 +67,7 @@ export function useFirstTimeSetup(profile, onComplete) {
                     if (!catError && category) {
                         categoryMap[i] = category.id;
                     } else if (catError) {
-                        console.error(`Error creating category ${categories[i]}:`, catError);
+                        console.error(`Error creating category ${categories[i]}:`, JSON.stringify(catError));
                     }
                 }
 
@@ -91,7 +93,9 @@ export function useFirstTimeSetup(profile, onComplete) {
                     .insert(itemsToInsert);
 
                 if (itemsError) {
-                    console.error('Error creating default items:', itemsError);
+                    console.error('Error creating default items:', JSON.stringify(itemsError));
+                    // Even if items fail, we should probably mark setup as done to prevent infinite loops?
+                    // Or at least allow retry later? For now, prevent loop is priority.
                     return;
                 }
 
@@ -104,7 +108,7 @@ export function useFirstTimeSetup(profile, onComplete) {
                     .eq('id', profile.id);
 
                 if (updateError) {
-                    console.error('Error updating profile:', updateError);
+                    console.error('Error updating profile:', JSON.stringify(updateError));
                 } else {
                     console.log('🎉 First-time setup completed!');
                     // Trigger welcome message
