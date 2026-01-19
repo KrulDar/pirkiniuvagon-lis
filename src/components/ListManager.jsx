@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 
 export default function ListManager({ lists, user, onClose }) {
+    const { t } = useTranslation()
     const [editingId, setEditingId] = useState(null)
     const [editName, setEditName] = useState('')
     const [newListName, setNewListName] = useState('')
@@ -20,7 +22,7 @@ export default function ListManager({ lists, user, onClose }) {
     }
 
     const deleteList = async (id) => {
-        if (!confirm('Delete this list? All items will be lost.')) return
+        if (!confirm(t('listManager.confirmDelete'))) return
         const { error } = await supabase.from('lists').delete().eq('id', id)
         if (error) {
             console.error('Error deleting list:', error)
@@ -61,27 +63,27 @@ export default function ListManager({ lists, user, onClose }) {
         }}>
             <div className="card" style={{ width: '90%', maxWidth: '500px', maxHeight: '80vh', overflowY: 'auto' }}>
                 <div className="flex justify-between items-center" style={{ marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid var(--color-border)' }}>
-                    <h3>Manage Lists</h3>
-                    <button onClick={onClose}>Close</button>
+                    <h3>{t('listManager.title')}</h3>
+                    <button onClick={onClose}>{t('listManager.close')}</button>
                 </div>
 
                 {/* Create New List Section */}
                 {isCreating ? (
                     <form onSubmit={createList} style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'var(--color-bg-body)', borderRadius: 'var(--radius-md)' }}>
                         <div style={{ marginBottom: '0.5rem' }}>
-                            <label style={{ fontSize: '0.85rem', fontWeight: 500, display: 'block', marginBottom: '0.25rem' }}>New List Name</label>
+                            <label style={{ fontSize: '0.85rem', fontWeight: 500, display: 'block', marginBottom: '0.25rem' }}>{t('listManager.newListName')}</label>
                             <input
                                 value={newListName}
                                 onChange={e => setNewListName(e.target.value)}
-                                placeholder="e.g., Weekly Shopping"
+                                placeholder={t('listManager.placeholder')}
                                 style={{ width: '100%' }}
                                 autoFocus
                                 required
                             />
                         </div>
                         <div className="flex gap-2">
-                            <button type="submit" className="primary" style={{ flex: 1 }}>Create</button>
-                            <button type="button" onClick={() => { setIsCreating(false); setNewListName('') }} style={{ flex: 1 }}>Cancel</button>
+                            <button type="submit" className="primary" style={{ flex: 1 }}>{t('listManager.create')}</button>
+                            <button type="button" onClick={() => { setIsCreating(false); setNewListName('') }} style={{ flex: 1 }}>{t('listManager.cancel')}</button>
                         </div>
                     </form>
                 ) : (
@@ -90,7 +92,7 @@ export default function ListManager({ lists, user, onClose }) {
                         className="primary"
                         style={{ width: '100%', marginBottom: '1.5rem' }}
                     >
-                        + Create New List
+                        {t('listManager.createButton')}
                     </button>
                 )}
 
@@ -105,8 +107,8 @@ export default function ListManager({ lists, user, onClose }) {
                                         style={{ flex: 1 }}
                                         autoFocus
                                     />
-                                    <button onClick={() => updateList(list.id)} className="primary">Save</button>
-                                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                                    <button onClick={() => updateList(list.id)} className="primary">{t('categories.save')}</button>
+                                    <button onClick={() => setEditingId(null)}>{t('categories.cancel')}</button>
                                 </div>
                             ) : (
                                 <>
@@ -119,24 +121,24 @@ export default function ListManager({ lists, user, onClose }) {
                                                     onClick={() => { setEditingId(list.id); setEditName(list.name); }}
                                                     style={{ fontSize: '0.85rem' }}
                                                 >
-                                                    Rename
+                                                    {t('listManager.rename')}
                                                 </button>
                                                 <button
                                                     onClick={() => deleteList(list.id)}
                                                     style={{ fontSize: '0.85rem', color: 'red' }}
                                                 >
-                                                    Delete
+                                                    {t('listManager.delete')}
                                                 </button>
                                             </>
                                         ) : (
-                                            <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Shared with you</span>
+                                            <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>{t('listManager.shared')}</span>
                                         )}
                                     </div>
                                 </>
                             )}
                         </div>
                     ))}
-                    {lists.length === 0 && <div style={{ color: 'var(--color-text-muted)' }}>No lists found.</div>}
+                    {lists.length === 0 && <div style={{ color: 'var(--color-text-muted)' }}>{t('listManager.noLists')}</div>}
                 </div>
             </div>
         </div>

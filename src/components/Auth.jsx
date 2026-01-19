@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 
 export default function Auth() {
+    const { t } = useTranslation()
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,14 +22,14 @@ export default function Auth() {
                     redirectTo: window.location.origin + '/ShoppingListApp', // Optional: redirect back to app
                 })
                 if (error) throw error
-                setMessage('Check your email for the password reset link!')
+                setMessage(t('auth.checkEmailReset'))
             } else if (isSignUp) {
                 const { error } = await supabase.auth.signUp({
                     email,
                     password,
                 })
                 if (error) throw error
-                setMessage('Check your email for the confirmation link!')
+                setMessage(t('auth.checkEmailConfirm'))
             } else {
                 const { error } = await supabase.auth.signInWithPassword({
                     email,
@@ -54,12 +56,12 @@ export default function Auth() {
                 </div>
 
                 <h1 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
-                    {isResetPassword ? 'Reset Password' : (isSignUp ? 'Create Account' : 'Welcome Back')}
+                    {isResetPassword ? t('auth.resetPassword') : (isSignUp ? t('auth.createAccount') : t('auth.welcomeBack'))}
                 </h1>
 
                 <form onSubmit={handleAuth} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Email</label>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>{t('auth.email')}</label>
                         <input
                             type="email"
                             value={email}
@@ -71,7 +73,7 @@ export default function Auth() {
 
                     {!isResetPassword && (
                         <div>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Password</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>{t('auth.password')}</label>
                             <input
                                 type="password"
                                 value={password}
@@ -95,21 +97,21 @@ export default function Auth() {
                     )}
 
                     <button type="submit" className="primary" disabled={loading}>
-                        {loading ? 'Loading...' : (isResetPassword ? 'Send Reset Link' : (isSignUp ? 'Sign Up' : 'Log In'))}
+                        {loading ? t('auth.loading') : (isResetPassword ? t('auth.sendReset') : (isSignUp ? t('auth.signUp') : t('auth.logIn')))}
                     </button>
                 </form>
 
                 <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', color: 'hsl(var(--color-text-muted))', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {!isResetPassword && (
                         <div>
-                            {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+                            {isSignUp ? t('auth.alreadyHaveAccount') : t('auth.dontHaveAccount')}
                             {' '}
                             <button
                                 type="button"
                                 onClick={() => { setIsSignUp(!isSignUp); setMessage(''); }}
                                 style={{ background: 'none', border: 'none', padding: 0, textDecoration: 'underline', boxShadow: 'none', color: 'var(--color-primary)' }}
                             >
-                                {isSignUp ? 'Log In' : 'Sign Up'}
+                                {isSignUp ? t('auth.logIn') : t('auth.signUp')}
                             </button>
                         </div>
                     )}
@@ -120,7 +122,7 @@ export default function Auth() {
                             onClick={() => { setIsResetPassword(true); setMessage(''); }}
                             style={{ background: 'none', border: 'none', padding: 0, fontSize: '0.85rem', color: 'hsl(var(--color-text-muted))', textDecoration: 'underline', boxShadow: 'none' }}
                         >
-                            Forgot Password?
+                            {t('auth.forgotPassword')}
                         </button>
                     )}
 
@@ -130,7 +132,7 @@ export default function Auth() {
                             onClick={() => { setIsResetPassword(false); setMessage(''); }}
                             style={{ background: 'none', border: 'none', padding: 0, textDecoration: 'underline', boxShadow: 'none', color: 'var(--color-primary)' }}
                         >
-                            Back to Log In
+                            {t('auth.backToLogin')}
                         </button>
                     )}
                 </div>

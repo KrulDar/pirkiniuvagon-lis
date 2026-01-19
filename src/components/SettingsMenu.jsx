@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 
 export default function SettingsMenu({ profile, role, lists, selectedListId, onSelectList, onManageLists }) {
+    const { t, i18n } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const menuRef = useRef(null)
 
@@ -38,12 +40,20 @@ export default function SettingsMenu({ profile, role, lists, selectedListId, onS
     }, [menuRef])
 
     const updateLanguage = async (lang) => {
+        i18n.changeLanguage(lang)
         const { error } = await supabase
             .from('profiles')
             .update({ language: lang })
             .eq('id', profile.id)
 
         if (error) console.error('Error updating language:', error)
+    }
+
+    const handleSignOut = async (e) => {
+        e.preventDefault()
+        setIsOpen(false)
+        const { error } = await supabase.auth.signOut()
+        if (error) console.error('Error signing out:', error)
     }
 
     return (
@@ -84,14 +94,14 @@ export default function SettingsMenu({ profile, role, lists, selectedListId, onS
                     {/* User Info */}
                     <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid var(--color-border)' }}>
                         <div style={{ fontWeight: 600, marginBottom: '0.25rem', wordBreak: 'break-all' }}>{profile?.email}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Role: {role}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>{t('settings.role', { role })}</div>
                     </div>
 
                     {/* Language Selector */}
                     <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>LANGUAGE</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>{t('settings.language')}</label>
                         <select
-                            value={profile?.language || 'lt'}
+                            value={i18n.resolvedLanguage || i18n.language || profile?.language || 'lt'}
                             onChange={(e) => updateLanguage(e.target.value)}
                             style={{ width: '100%' }}
                         >
@@ -103,7 +113,7 @@ export default function SettingsMenu({ profile, role, lists, selectedListId, onS
 
                     {/* List Selector (Moved from header) */}
                     <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>ACTIVE LIST</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>{t('settings.activeList')}</label>
                         <select
                             value={selectedListId || ''}
                             onChange={(e) => {
@@ -116,52 +126,52 @@ export default function SettingsMenu({ profile, role, lists, selectedListId, onS
                             }}
                             style={{ width: '100%' }}
                         >
-                            <option value="" disabled>Select List</option>
+                            <option value="" disabled>{t('settings.selectList')}</option>
                             {lists?.map(list => (
                                 <option key={list.id} value={list.id}>{list.name}</option>
                             ))}
                             <option disabled>──────────</option>
-                            <option value="__MANAGE__">⚙ Manage Lists</option>
+                            <option value="__MANAGE__">{t('settings.manageLists')}</option>
                         </select>
                     </div>
 
                     {/* Theme Toggle */}
                     <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>APPEARANCE</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>{t('settings.appearance')}</label>
                         <div style={{ display: 'flex', background: 'var(--color-bg-body)', padding: '0.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                             <button
                                 onClick={() => setTheme('light')}
                                 style={{ flex: 1, padding: '0.4rem', fontSize: '1.2rem', background: theme === 'light' ? 'var(--color-bg-card)' : 'transparent', border: 'none', boxShadow: theme === 'light' ? 'var(--shadow-sm)' : 'none' }}
-                                title="Light Mode"
+                                title={t('titles.lightMode')}
                             >
                                 ☀️
                             </button>
                             <button
                                 onClick={() => setTheme('dark')}
                                 style={{ flex: 1, padding: '0.4rem', fontSize: '1.2rem', background: theme === 'dark' ? 'var(--color-bg-card)' : 'transparent', border: 'none', boxShadow: theme === 'dark' ? 'var(--shadow-sm)' : 'none' }}
-                                title="Dark Mode"
+                                title={t('titles.darkMode')}
                             >
                                 🌙
                             </button>
                             <button
                                 onClick={() => setTheme('system')}
                                 style={{ flex: 1, padding: '0.4rem', fontSize: '1rem', background: theme === 'system' ? 'var(--color-bg-card)' : 'transparent', border: 'none', boxShadow: theme === 'system' ? 'var(--shadow-sm)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                title="System Default"
+                                title={t('titles.systemDefault')}
                             >
-                                Auto
+                                {t('settings.auto')}
                             </button>
                         </div>
                     </div>
 
                     {role === 'admin' && (
-                        <button style={{ width: '100%', textAlign: 'left' }}>Admin Panel</button>
+                        <button style={{ width: '100%', textAlign: 'left' }}>{t('settings.adminPanel')}</button>
                     )}
 
                     <button
-                        onClick={() => supabase.auth.signOut()}
+                        onClick={handleSignOut}
                         style={{ width: '100%', textAlign: 'left', color: 'hsl(0, 80%, 60%)', marginTop: '0.5rem', border: '1px solid hsl(0, 80%, 90%)', background: 'hsl(0, 80%, 98%)' }}
                     >
-                        Sign Out
+                        {t('settings.signOut')}
                     </button>
                 </div>
             )}

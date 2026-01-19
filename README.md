@@ -1,16 +1,46 @@
-# React + Vite
+# Shopping List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, real-time collaborative shopping list application built with React and Supabase.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-time Collaboration**: Changes appear instantly across all devices.
+- **Multiple Lists**: Create and manage multiple shopping lists.
+- **Smart Categorization**: Organize items by categories with custom colors.
+- **User Roles**: Role-based access control (Admin/User).
+- **Responsive Design**: Mobile-first interface with dark mode support.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, Vite
+- **Backend & Database**: Supabase (PostgreSQL, Auth, Realtime)
+- **Styling**: Vanilla CSS with CSS Variables (HSL)
+- **State Management**: React Hooks + Supabase Realtime
 
-## Expanding the ESLint configuration
+## Quick Start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Clone the repository**
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Setup Environment Variables**:
+    Copy `.env.example` to `.env` (create one if it doesn't exist) and add your Supabase credentials:
+    ```env
+    VITE_SUPABASE_URL=your_project_url
+    VITE_SUPABASE_ANON_KEY=your_anon_key
+    ```
+4.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+## Documentation
+
+- [Setup Guide](docs/SETUP.md) - Detailed installation and configuration instructions.
+- [Architecture Overview](docs/ARCHITECTURE.md) - Project structure, state management, and database schema.
+- [Contributing Guidelines](docs/CONTRIBUTING.md) - How to contribute to the project.
+
+## License
+
+MIT

@@ -1,6 +1,8 @@
 import SettingsMenu from './SettingsMenu'
+import { useTranslation } from 'react-i18next'
 
 export default function Navbar({ lists, selectedListId, onSelectList, onManageLists, profile, role }) {
+    const { t } = useTranslation()
     return (
         <nav className="card" style={{
             display: 'flex',
@@ -13,7 +15,7 @@ export default function Navbar({ lists, selectedListId, onSelectList, onManageLi
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div style={{ fontSize: '1.5rem' }}>🛒</div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-primary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                    Shopping List
+                    {t('nav.title')}
                 </div>
             </div>
 

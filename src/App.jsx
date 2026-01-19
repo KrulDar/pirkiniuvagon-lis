@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth'
 import Navbar from './components/Navbar'
@@ -7,6 +8,7 @@ import ListManager from './components/ListManager'
 import { useAppData } from './hooks/useAppData'
 
 function App() {
+  const { t, i18n } = useTranslation()
   const [session, setSession] = useState(null)
   const [authLoading, setAuthLoading] = useState(true)
   const [selectedListId, setSelectedListId] = useState(null)
@@ -30,10 +32,17 @@ function App() {
 
   const { profile, role, lists, loading: dataLoading } = useAppData(session)
 
+  useEffect(() => {
+    if (profile?.language && !i18n.initializedLanguageSync) {
+      i18n.changeLanguage(profile.language)
+      i18n.initializedLanguageSync = true
+    }
+  }, [profile, i18n])
+
 
 
   if (authLoading) {
-    return <div style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>Connect...</div>
+    return <div style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>{t('app.connect')}</div>
   }
 
   if (!session) {
@@ -41,7 +50,7 @@ function App() {
   }
 
   if (dataLoading) {
-    return <div style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>Loading data...</div>
+    return <div style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>{t('app.loading')}</div>
   }
 
   const activeListId = selectedListId || (lists.length > 0 ? lists[0].id : null)

@@ -1,9 +1,11 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import { useListItems } from '../hooks/useListItems'
 import CategoryManager from './CategoryManager'
 
 export default function ShoppingList({ listId }) {
+    const { t } = useTranslation()
     const { categories, items, loading, updateLocalItem } = useListItems(listId)
 
     // Local state for UI
@@ -79,7 +81,7 @@ export default function ShoppingList({ listId }) {
         e.preventDefault()
         if (!newItemName.trim()) return
         if (!listId) {
-            alert('No list selected!')
+            alert(t('list.noListSelected'))
             return
         }
 
@@ -106,7 +108,7 @@ export default function ShoppingList({ listId }) {
     }
 
     const deleteItem = async (itemId) => {
-        if (!confirm("Delete this item?")) return;
+        if (!confirm(t('list.confirmDeleteItem'))) return;
         const { error } = await supabase.from('items').delete().eq('id', itemId);
         if (error) console.error("Error deleting item:", error);
     }
@@ -138,7 +140,7 @@ export default function ShoppingList({ listId }) {
         }
     })
 
-    if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading list...</div>
+    if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>{t('app.loading')}</div>
 
     return (
         <div className="shopping-list">
@@ -164,7 +166,7 @@ export default function ShoppingList({ listId }) {
                             fontSize: '1.2rem',
                             flexShrink: 0
                         }}
-                        title={showCheckedOnly ? "Show All items" : "Show only Checked items"}
+                        title={showCheckedOnly ? t('titles.showAll') : t('titles.showChecked')}
                     >
                         {/* Filter Icon */}
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -172,14 +174,14 @@ export default function ShoppingList({ listId }) {
                         </svg>
 
                         {/* Selected Items Label (Only shows when active to save space? Or always? User asked to put it near. Let's show it always if space permits, or better yet, make the button expand when active) */}
-                        <span style={{ fontSize: '0.9rem', fontWeight: 500, display: showCheckedOnly ? 'inline' : 'none' }}>Selected items</span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 500, display: showCheckedOnly ? 'inline' : 'none' }}>{t('list.selectedItems')}</span>
                     </button>
 
                     {/* Search Bar */}
                     <div style={{ flex: 1, position: 'relative' }}>
                         <input
                             type="text"
-                            placeholder="Search items..."
+                            placeholder={t('list.searchPlaceholder')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             style={{
@@ -204,8 +206,8 @@ export default function ShoppingList({ listId }) {
                 {showCatManager && !isAdding && (
                     <div style={{ marginTop: '1rem', borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                            <h3 style={{ fontSize: '1rem' }}>Manage Categories</h3>
-                            <button onClick={() => setShowCatManager(false)} style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem' }}>Close</button>
+                            <h3 style={{ fontSize: '1rem' }}>{t('categories.manage')}</h3>
+                            <button onClick={() => setShowCatManager(false)} style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem' }}>{t('categories.close')}</button>
                         </div>
                         <CategoryManager categories={categories} onClose={() => { }} />
                     </div>
@@ -215,19 +217,19 @@ export default function ShoppingList({ listId }) {
                 {isAdding && (
                     <form onSubmit={addItem} style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
                         <div style={{ flex: 2, minWidth: '150px' }}>
-                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>Item Name</label>
+                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>{t('list.itemName')}</label>
                             <input
                                 autoFocus
                                 type="text"
                                 value={newItemName}
                                 onChange={(e) => setNewItemName(e.target.value)}
-                                placeholder="e.g. Milk"
+                                placeholder={t('list.itemNamePlaceholder')}
                                 required
                                 style={{ width: '100%' }}
                             />
                         </div>
                         <div style={{ width: '80px' }}>
-                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>Qty</label>
+                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>{t('list.qty')}</label>
                             <input
                                 type="number"
                                 min="1"
@@ -237,29 +239,29 @@ export default function ShoppingList({ listId }) {
                             />
                         </div>
                         <div style={{ flex: 1, minWidth: '120px' }}>
-                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>Category</label>
+                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>{t('list.category')}</label>
                             <select
                                 value={newItemCategory}
                                 onChange={(e) => setNewItemCategory(e.target.value)}
                                 style={{ width: '100%' }}
                             >
-                                <option value="">Uncategorized</option>
+                                <option value="">{t('categories.uncategorized')}</option>
                                 {categories.map(cat => (
                                     <option key={cat.id} value={cat.id}>{cat.name}</option>
                                 ))}
                             </select>
                         </div>
                         <div style={{ flex: 2, minWidth: '150px' }}>
-                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>Comment</label>
+                            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '0.25rem' }}>{t('list.comment')}</label>
                             <input
                                 type="text"
                                 value={newItemComment}
                                 onChange={(e) => setNewItemComment(e.target.value)}
-                                placeholder="Optional note"
+                                placeholder={t('list.commentPlaceholder')}
                                 style={{ width: '100%' }}
                             />
                         </div>
-                        <button type="submit" className="primary" style={{ height: '38px', minWidth: '80px' }}>Add</button>
+                        <button type="submit" className="primary" style={{ height: '38px', minWidth: '80px' }}>{t('categories.add')}</button>
                     </form>
                 )}
             </div>
@@ -294,7 +296,7 @@ export default function ShoppingList({ listId }) {
                             {cat.name}
                             {isCollapsed && (
                                 <span style={{ fontSize: '0.85rem', opacity: 0.6, fontWeight: 'normal' }}>
-                                    ({itemCount} {itemCount === 1 ? 'item' : 'items'})
+                                    {t('categories.itemsCount_plural', { count: itemCount })}
                                 </span>
                             )}
                         </h3>
@@ -318,7 +320,7 @@ export default function ShoppingList({ listId }) {
 
             {uncategorized.length > 0 && (
                 <div className="category-group" style={{ marginBottom: '1.5rem' }}>
-                    <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Uncategorized</h3>
+                    <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{t('categories.uncategorized')}</h3>
                     <div className="items-grid" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         {uncategorized.map(item => (
                             <ItemRow
@@ -336,14 +338,14 @@ export default function ShoppingList({ listId }) {
 
             {items.length === 0 && !loading && (
                 <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>
-                    <p>This list is empty.</p>
-                    <button style={{ marginTop: '1rem' }} onClick={() => setIsAdding(true)}>Add your first item</button>
+                    <p>{t('list.emptyList')}</p>
+                    <button style={{ marginTop: '1rem' }} onClick={() => setIsAdding(true)}>{t('list.addFirstItem')}</button>
                 </div>
             )}
 
             {items.length > 0 && filteredItems.length === 0 && !loading && (
                 <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>
-                    <p>No items match your filters.</p>
+                    <p>{t('list.noMatches')}</p>
                 </div>
             )}
         </div>
@@ -351,6 +353,7 @@ export default function ShoppingList({ listId }) {
 }
 
 function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) {
+    const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const menuRef = useRef(null)
 
@@ -386,7 +389,7 @@ function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) 
                     fontSize: '1.5rem',
                     lineHeight: 1
                 }}
-                title={isAdding ? "Cancel" : "Add or Manage"}
+                title={isAdding ? t('categories.cancel') : t('titles.addOrManage')}
             >
                 {isAdding ? '✕' : '+'}
             </button>
@@ -413,7 +416,7 @@ function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) 
                         }}
                         style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     >
-                        <span style={{ fontSize: '1.2rem' }}>➕</span> Add Item
+                        <span style={{ fontSize: '1.2rem' }}>➕</span> {t('list.addItem')}
                     </button>
                     <button
                         onClick={() => {
@@ -422,7 +425,7 @@ function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) 
                         }}
                         style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     >
-                        <span style={{ fontSize: '1.2rem' }}>📂</span> {showCatManager ? 'Hide Categories' : 'Manage Categories'}
+                        <span style={{ fontSize: '1.2rem' }}>📂</span> {showCatManager ? t('list.hideCategories') : t('list.manageCategories')}
                     </button>
                 </div>
             )}
@@ -431,6 +434,7 @@ function PlusMenu({ isAdding, setIsAdding, showCatManager, setShowCatManager }) 
 }
 
 function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
+    const { t } = useTranslation()
     const [isEditing, setIsEditing] = useState(false)
     const [showComment, setShowComment] = useState(false)
     const [edited, setEdited] = useState({
@@ -466,7 +470,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
             <div className="item-row card" style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', border: '1px solid var(--color-primary)' }}>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <div style={{ flex: 2 }}>
-                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Name</label>
+                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{t('list.itemName')}</label>
                         <input
                             value={edited.name}
                             onChange={e => setEdited({ ...edited, name: e.target.value })}
@@ -475,7 +479,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                         />
                     </div>
                     <div style={{ width: '80px' }}>
-                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Qty</label>
+                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{t('list.qty')}</label>
                         <input
                             type="number" min="1"
                             value={edited.amount}
@@ -486,13 +490,13 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <div style={{ flex: 1 }}>
-                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Category</label>
+                        <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{t('list.category')}</label>
                         <select
                             value={edited.category_id}
                             onChange={e => setEdited({ ...edited, category_id: e.target.value })}
                             style={{ width: '100%' }}
                         >
-                            <option value="">Uncategorized</option>
+                            <option value="">{t('categories.uncategorized')}</option>
                             {categories.map(cat => (
                                 <option key={cat.id} value={cat.id}>{cat.name}</option>
                             ))}
@@ -500,17 +504,17 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                     </div>
                 </div>
                 <div style={{ width: '100%' }}>
-                    <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Comment</label>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{t('list.comment')}</label>
                     <input
                         value={edited.comment}
                         onChange={e => setEdited({ ...edited, comment: e.target.value })}
-                        placeholder="Optional note"
+                        placeholder={t('list.commentPlaceholder')}
                         style={{ width: '100%' }}
                     />
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    <button className="primary" onClick={save} style={{ flex: 1 }}>Save</button>
-                    <button onClick={() => setIsEditing(false)} style={{ flex: 1 }}>Cancel</button>
+                    <button className="primary" onClick={save} style={{ flex: 1 }}>{t('list.save')}</button>
+                    <button onClick={() => setIsEditing(false)} style={{ flex: 1 }}>{t('list.cancel')}</button>
                     <button
                         onClick={() => {
                             setIsEditing(false)
@@ -518,7 +522,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                         }}
                         style={{ flex: 1, backgroundColor: 'hsl(0, 70%, 50%)', color: 'white' }}
                     >
-                        Delete
+                        {t('list.delete')}
                     </button>
                 </div>
             </div>
@@ -574,7 +578,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                         borderRadius: 'var(--radius-sm)',
                         minWidth: '28px'
                     }}
-                    title="Decrease quantity"
+                    title={t('titles.decreaseQty')}
                 >
                     −
                 </button>
@@ -598,7 +602,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                         borderRadius: 'var(--radius-sm)',
                         minWidth: '28px'
                     }}
-                    title="Increase quantity"
+                    title={t('titles.increaseQty')}
                 >
                     +
                 </button>
@@ -618,7 +622,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                             fontWeight: 600,
                             border: 'none'
                         }}
-                        title="View comment"
+                        title={t('titles.viewComment')}
                     >
                         💬
                     </button>
@@ -681,7 +685,7 @@ function ItemRow({ item, categories, onToggle, onUpdate, onDelete }) {
                     backgroundColor: 'var(--color-bg-card)',
                     borderRadius: 'var(--radius-sm)'
                 }}
-                title="Edit item"
+                title={t('titles.editItem')}
             >
                 ✏️
             </button>
