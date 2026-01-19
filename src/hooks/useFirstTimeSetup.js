@@ -6,7 +6,7 @@ import { DEFAULT_CATEGORIES, DEFAULT_LIST_NAME, DEFAULT_ITEMS } from '../lib/def
  * Hook to handle first-time user setup
  * Creates a default "Food" list with pre-populated items based on user's signup language
  */
-export function useFirstTimeSetup(profile) {
+export function useFirstTimeSetup(profile, onComplete) {
     useEffect(() => {
         if (!profile) return;
 
@@ -103,6 +103,8 @@ export function useFirstTimeSetup(profile) {
                     console.error('Error updating profile:', updateError);
                 } else {
                     console.log('🎉 First-time setup completed!');
+                    // Trigger welcome message
+                    if (onComplete) onComplete();
                 }
 
             } catch (error) {
@@ -111,5 +113,5 @@ export function useFirstTimeSetup(profile) {
         };
 
         setupDefaultList();
-    }, [profile]);
+    }, [profile, onComplete]);
 }

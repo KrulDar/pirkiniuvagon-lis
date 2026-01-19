@@ -45,6 +45,10 @@ const resources = {
                 "checkEmailReset": "Check your email for the password reset link!",
                 "checkEmailConfirm": "Check your email for the confirmation link!"
             },
+            "welcome": {
+                "title": "Welcome!",
+                "message": "We've created a starter 'Food' list with common items. Feel free to customize or delete it."
+            },
             "listManager": {
                 "title": "Manage Lists",
                 "close": "Close",
@@ -156,6 +160,10 @@ const resources = {
                 "checkEmailReset": "Sjekk e-posten for lenke til passordbytte!",
                 "checkEmailConfirm": "Sjekk e-posten for bekreftelseslenke!"
             },
+            "welcome": {
+                "title": "Velkommen!",
+                "message": "Vi har laget en startliste 'Mat' med vanlige varer. Du kan tilpasse eller slette den."
+            },
             "listManager": {
                 "title": "Administrer lister",
                 "close": "Lukk",
@@ -266,6 +274,10 @@ const resources = {
                 "backToLogin": "Grįžti į prisijungimą",
                 "checkEmailReset": "Patikrinkite el. paštą dėl slaptažodžio atstatymo nuorodos!",
                 "checkEmailConfirm": "Patikrinkite el. paštą dėl patvirtinimo nuorodos!"
+            },
+            "welcome": {
+                "title": "Sveiki!",
+                "message": "Sukūrėme pradinį 'Maistas' sąrašą su įprastais produktais. Galite jį keisti arba ištrinti."
             },
             "listManager": {
                 "title": "Valdyti sąrašus",

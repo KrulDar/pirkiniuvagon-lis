@@ -14,6 +14,7 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true)
   const [selectedListId, setSelectedListId] = useState(null)
   const [showListManager, setShowListManager] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(false)
   const initializedLanguageSync = useRef(false)
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
@@ -47,7 +48,7 @@ function App() {
   const { profile, role, lists, loading: dataLoading } = useAppData(session)
 
   // Handle first-time user setup (create default list)
-  useFirstTimeSetup(profile)
+  useFirstTimeSetup(profile, () => setShowWelcome(true))
 
   useEffect(() => {
     if (profile?.language && !initializedLanguageSync.current) {
@@ -90,6 +91,42 @@ function App() {
           user={session?.user}
           onClose={() => setShowListManager(false)}
         />
+      )}
+
+      {showWelcome && (
+        <div style={{
+          backgroundColor: 'hsl(140 60% 95%)',
+          color: 'hsl(140 100% 25%)',
+          padding: '1rem 1.5rem',
+          margin: '1rem',
+          borderRadius: 'var(--radius-md)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+        }}>
+          <div style={{ flex: 1 }}>
+            <strong style={{ fontSize: '1.1rem' }}>🎉 {t('welcome.title')}</strong>
+            <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem' }}>
+              {t('welcome.message')}
+            </p>
+          </div>
+          <button
+            onClick={() => setShowWelcome(false)}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '1.5rem',
+              cursor: 'pointer',
+              padding: '0.25rem',
+              opacity: 0.7,
+              boxShadow: 'none'
+            }}
+          >
+            ×
+          </button>
+        </div>
       )}
 
       <main key={currentLanguage}>
