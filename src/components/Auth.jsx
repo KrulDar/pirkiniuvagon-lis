@@ -10,6 +10,7 @@ export default function Auth() {
     const [isSignUp, setIsSignUp] = useState(false)
     const [isResetPassword, setIsResetPassword] = useState(false)
     const [message, setMessage] = useState('')
+    const [signupLanguage, setSignupLanguage] = useState('en')
 
     const handleAuth = async (e) => {
         e.preventDefault()
@@ -27,6 +28,11 @@ export default function Auth() {
                 const { error } = await supabase.auth.signUp({
                     email,
                     password,
+                    options: {
+                        data: {
+                            signup_language: signupLanguage
+                        }
+                    }
                 })
                 if (error) throw error
                 setMessage(t('auth.checkEmailConfirm'))
@@ -81,6 +87,24 @@ export default function Auth() {
                                 required
                                 style={{ width: '100%' }}
                             />
+                        </div>
+                    )}
+
+                    {isSignUp && (
+                        <div>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>{t('auth.language')}</label>
+                            <select
+                                value={signupLanguage}
+                                onChange={(e) => setSignupLanguage(e.target.value)}
+                                style={{ width: '100%' }}
+                            >
+                                <option value="en">English</option>
+                                <option value="no">Norsk</option>
+                                <option value="lt">Lietuvių</option>
+                            </select>
+                            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+                                {t('auth.languageHelper')}
+                            </p>
                         </div>
                     )}
 

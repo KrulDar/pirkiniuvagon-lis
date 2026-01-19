@@ -1,0 +1,851 @@
+{
+  "listName": "Kiwi",
+  "exportedAt": "2026-01-18T16:16:14.947Z",
+  "categories": [
+    "🍿 Užkandžiai",
+    "🥛 Pieno produktai",
+    "🍦 Šaldyti produktai",
+    "💊 Papildai",
+    "🍞 Duona ir bandelės",
+    "🥬 Daržovės",
+    "🍎 Vaisiai ir uogos",
+    "🥜 Riešutai ir sėklos",
+    "🧀 Sūriai",
+    "🥩 Mėsa ir žuvis",
+    "🌮 Taco produktai",
+    "🍚 Kruopos ir miltai",
+    "🥫 Konservai",
+    "🍪 Sausieji produktai",
+    "🧂 Prieskoniai ir padažai",
+    "🥤 Gėrimai",
+    "🧻 Namų ūkio prekės"
+  ],
+  "items": [
+    {
+      "name": "Čipsų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍿 Užkandžiai"
+    },
+    {
+      "name": "Graikiško jogurto",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Šaldyto mango",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍦 Šaldyti produktai"
+    },
+    {
+      "name": "Varškės",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Vitamino C",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "💊 Papildai"
+    },
+    {
+      "name": "Ženšenio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "💊 Papildai"
+    },
+    {
+      "name": "Šaldytų bandelių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Panini",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Kruasanų 🥐",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Duonos 🍞🍞",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Iceberg salotos 🥬",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Burokėlių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Agurko 🥒🥒",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Avokado 🥑🥑",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Mėtos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Mango 🥭",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Nektarinų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Arbūzo",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Morkų 🥕🥕",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Daigėlių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Riešutų mix",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥜 Riešutai ir sėklos"
+    },
+    {
+      "name": "Kedro riešutėlių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥜 Riešutai ir sėklos"
+    },
+    {
+      "name": "Sezamo sėklų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥜 Riešutai ir sėklos"
+    },
+    {
+      "name": "Moliūgo sėklų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥜 Riešutai ir sėklos"
+    },
+    {
+      "name": "Uogų 🍓🫐🍇",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Tarkuoto sūrio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧀 Sūriai"
+    },
+    {
+      "name": "Tepamo sūrelio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧀 Sūriai"
+    },
+    {
+      "name": "Mėsyčių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Kumpėlio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Jautienos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Apelsinų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Vištienos filė",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Skinkeost",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Lašišos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Šinkės mažais gabaliukais",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Kavos pieno 🥛",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Migdolų pieno",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Obuolių 🍏🍏",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Mandarinų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Taco lavašiukų 🥙🌮",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🌮 Taco produktai"
+    },
+    {
+      "name": "Taco lavašiukų mažiukų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🌮 Taco produktai"
+    },
+    {
+      "name": "Ryžių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍚 Kruopos ir miltai"
+    },
+    {
+      "name": "Sluoksniuotos tešlos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍚 Kruopos ir miltai"
+    },
+    {
+      "name": "Pomidorų tyrės skardinės 🍅",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Kukurūzų 🌽🌽",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Konservuotų žirnelių 2vnt",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Konservuotų kukurūzų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Trapučių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Granolų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Duonos skrebučių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Cukraus pudros",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Cukraus",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Druskos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Kepimo miltelių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Pesto",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Sojų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Sultinio kubelių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Garstyčių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Karma prieskonių slovikėlis",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Citrinos koncentrato buteliukyje",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧂 Prieskoniai ir padažai"
+    },
+    {
+      "name": "Faršo",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Persimonų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Paprasto pieno 🥛",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Salotų maišelis",
+      "amount": 1,
+      "checked": false,
+      "comment": "Morku ir kopustu",
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Svogūnėlių 🧄",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Žiedinio kopūsto",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Salotų mišinys 1",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Citrinų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Baziliko",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Biolos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Bulvių paprastų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Bulvės saldžios",
+      "amount": 2,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Paprikos 🌶️",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Braškių 🍓🍓",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Sūrio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧀 Sūriai"
+    },
+    {
+      "name": "Mozzarelos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧀 Sūriai"
+    },
+    {
+      "name": "Fetos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧀 Sūriai"
+    },
+    {
+      "name": "Moliūgo",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Bananų 🍌🍌",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Bacon juostelių 🥓",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Pomidoriukų 🍅",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Kiwi",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍎 Vaisiai ir uogos"
+    },
+    {
+      "name": "Kiaušinių 🥚",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Raugintų agurkų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥬 Daržovės"
+    },
+    {
+      "name": "Sviesto 🧈",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Majonezo",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Tirpinto sviesto",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Kondensūoto pieno",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Taco prieskonių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🌮 Taco produktai"
+    },
+    {
+      "name": "Taco laivėlių 🌮🥙",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🌮 Taco produktai"
+    },
+    {
+      "name": "Popkornų 🍿🍿🍿",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍿 Užkandžiai"
+    },
+    {
+      "name": "Džiovintų mango",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍿 Užkandžiai"
+    },
+    {
+      "name": "Dėžutė ledų 🍦🍨",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍦 Šaldyti produktai"
+    },
+    {
+      "name": "Višnių šaldytų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍦 Šaldyti produktai"
+    },
+    {
+      "name": "Bulvyčių fri šaldytų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍦 Šaldyti produktai"
+    },
+    {
+      "name": "Sprite",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥤 Gėrimai"
+    },
+    {
+      "name": "Nealkoholinio alaus",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥤 Gėrimai"
+    },
+    {
+      "name": "Mineralinio",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥤 Gėrimai"
+    },
+    {
+      "name": "Tualetinio popieriaus",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    },
+    {
+      "name": "Rankų popieriaus",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    },
+    {
+      "name": "Kepimo popieriaus",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    },
+    {
+      "name": "Miltų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍚 Kruopos ir miltai"
+    },
+    {
+      "name": "Sausų pusryčių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Avinžirnių",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍪 Sausieji produktai"
+    },
+    {
+      "name": "Jogurtukų",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Grietinės juodos",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Grietinėlės",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥛 Pieno produktai"
+    },
+    {
+      "name": "Burgerių bandelių 🍔",
+      "amount": 1,
+      "checked": false,
+      "comment": "Skaniu",
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Duonelė hvitløk kepimui",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍞 Duona ir bandelės"
+    },
+    {
+      "name": "Siuksliu Maisu",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    },
+    {
+      "name": "Uogienė",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Koncerv. Pupelės",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥫 Konservai"
+    },
+    {
+      "name": "Krevetės keptos iš Remos",
+      "amount": 12,
+      "checked": false,
+      "comment": null,
+      "category": "🥩 Mėsa ir žuvis"
+    },
+    {
+      "name": "Manai",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🍚 Kruopos ir miltai"
+    },
+    {
+      "name": "Dušo žele",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    },
+    {
+      "name": "Švepsas",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥤 Gėrimai"
+    },
+    {
+      "name": "Švepsas",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🥤 Gėrimai"
+    },
+    {
+      "name": "Indaploves tabletes",
+      "amount": 1,
+      "checked": false,
+      "comment": null,
+      "category": "🧻 Namų ūkio prekės"
+    }
+  ]
+}

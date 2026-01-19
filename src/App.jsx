@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import ShoppingList from './components/ShoppingList'
 import ListManager from './components/ListManager'
 import { useAppData } from './hooks/useAppData'
+import { useFirstTimeSetup } from './hooks/useFirstTimeSetup'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -44,6 +45,9 @@ function App() {
   }, [i18n])
 
   const { profile, role, lists, loading: dataLoading } = useAppData(session)
+
+  // Handle first-time user setup (create default list)
+  useFirstTimeSetup(profile)
 
   useEffect(() => {
     if (profile?.language && !initializedLanguageSync.current) {
