@@ -175,7 +175,7 @@ export default function SettingsMenu({ profile, role, lists, selectedListId, onS
                         {t('settings.signOut')}
                     </button>
                     <div style={{ textAlign: 'center', fontSize: '0.7rem', color: 'var(--color-text-muted)', marginTop: '0.5rem', opacity: 0.7 }}>
-                        v1.2.0 (i18n-fix)
+                        v1.2.1
                     </div>
                 </div>
             )}

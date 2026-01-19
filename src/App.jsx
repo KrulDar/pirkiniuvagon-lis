@@ -14,6 +14,7 @@ function App() {
   const [selectedListId, setSelectedListId] = useState(null)
   const [showListManager, setShowListManager] = useState(false)
   const initializedLanguageSync = useRef(false)
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -30,6 +31,17 @@ function App() {
 
     return () => subscription.unsubscribe()
   }, [])
+
+  // Listen for language changes and force re-render
+  useEffect(() => {
+    const handleLanguageChange = (lng) => {
+      console.log('🌐 App: Language changed to:', lng);
+      setCurrentLanguage(lng)
+    }
+
+    i18n.on('languageChanged', handleLanguageChange)
+    return () => i18n.off('languageChanged', handleLanguageChange)
+  }, [i18n])
 
   const { profile, role, lists, loading: dataLoading } = useAppData(session)
 
@@ -76,7 +88,7 @@ function App() {
         />
       )}
 
-      <main>
+      <main key={currentLanguage}>
         {activeListId ? (
           <ShoppingList listId={activeListId} />
         ) : (

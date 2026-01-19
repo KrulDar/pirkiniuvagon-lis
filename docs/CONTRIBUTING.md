@@ -1,6 +1,8 @@
 # Contributing
 
+
 We welcome contributions to the Shopping List App!
+Please check [KNOWN_ISSUES.md](KNOWN_ISSUES.md) for current bugs before reporting new ones.
 
 ## Getting Started
 
