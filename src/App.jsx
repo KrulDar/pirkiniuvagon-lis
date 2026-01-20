@@ -117,7 +117,7 @@ function App() {
         }}>
           <div style={{ flex: 1 }}>
             <strong style={{ fontSize: '1.1rem' }}>🎉 {t('welcome.title')}</strong>
-            <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem' }}>
+            <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem', whiteSpace: 'pre-line' }}>
               {t('welcome.message')}
             </p>
           </div>

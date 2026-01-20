@@ -46,8 +46,8 @@ const resources = {
                 "checkEmailConfirm": "Check your email for the confirmation link!"
             },
             "welcome": {
-                "title": "Welcome!",
-                "message": "We've created a starter 'Food' list with common items. Feel free to customize or delete it."
+                "title": "Welcome to Shopping List App!",
+                "message": "You'll love this simple and effective tool.\n\nWe've created a first shopping list for you to get started. You can fill it with your own items and delete unused ones.\n\nHow to use:\n1. Mark the items you want to buy.\n2. Use the filter to show only marked items.\n3. Unmark items as you place them in your basket.\n\nSimple and effective!"
             },
             "listManager": {
                 "title": "Manage Lists",
@@ -161,8 +161,8 @@ const resources = {
                 "checkEmailConfirm": "Sjekk e-posten for bekreftelseslenke!"
             },
             "welcome": {
-                "title": "Velkommen!",
-                "message": "Vi har laget en startliste 'Mat' med vanlige varer. Du kan tilpasse eller slette den."
+                "title": "Velkommen til Handleliste-appen!",
+                "message": "Du kommer til å like denne enkle og effektive appen.\n\nVi har laget en første handleliste for å hjelpe deg i gang. Du kan fylle den med dine egne varer og slette de du ikke bruker.\n\nSlik bruker du den:\n1. Merk varene du vil kjøpe.\n2. Bruk filteret for å vise kun merkede varer.\n3. Avmerk varer etter hvert som du legger dem i handlekurven.\n\nEnkelt og effektivt!"
             },
             "listManager": {
                 "title": "Administrer lister",
@@ -276,8 +276,8 @@ const resources = {
                 "checkEmailConfirm": "Patikrinkite el. paštą dėl patvirtinimo nuorodos!"
             },
             "welcome": {
-                "title": "Sveiki!",
-                "message": "Sukūrėme pradinį 'Maistas' sąrašą su įprastais produktais. Galite jį keisti arba ištrinti."
+                "title": "Sveiki prisijungę prie Shopping List App!",
+                "message": "Jums tikrai patiks ši paprasta ir efektyvi programėlė.\n\nMes sukūrėme jums pirmą pirkinių sąrašą pradžiai. Jį galite pildyti savo prekėmis ir ištrinti nenaudojamas.\n\nKaip naudotis?\n1. Pažymėkite produktus, kuriuos norėsite pirkti.\n2. Paspauskite filtro mygtuką, kad rodytų tik pažymėtas prekes.\n3. Atžymėkite produktus, kuriuos jau įsidėjote į krepšelį.\n\nPaprasta ir efektyvu!"
             },
             "listManager": {
                 "title": "Valdyti sąrašus",
