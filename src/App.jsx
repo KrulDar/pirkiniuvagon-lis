@@ -14,7 +14,9 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true)
   const [selectedListId, setSelectedListId] = useState(null)
   const [showListManager, setShowListManager] = useState(false)
-  const [showWelcome, setShowWelcome] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(() => {
+    return localStorage.getItem('show_welcome') === 'true'
+  })
   const initializedLanguageSync = useRef(false)
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
@@ -45,11 +47,14 @@ function App() {
     return () => i18n.off('languageChanged', handleLanguageChange)
   }, [i18n])
 
-  const { profile, role, lists, loading: dataLoading } = useAppData(session)
+  const { profile, role, lists, loading: dataLoading, refresh } = useAppData(session)
 
   const handleSetupComplete = useCallback(() => {
-    setShowWelcome(true)
-  }, [])
+    console.log('🎉 Setup complete, showing welcome message');
+    localStorage.setItem('show_welcome', 'true');
+    setShowWelcome(true);
+    refresh();
+  }, [refresh])
 
   // Handle first-time user setup (create default list)
   useFirstTimeSetup(profile, handleSetupComplete)
@@ -117,7 +122,10 @@ function App() {
             </p>
           </div>
           <button
-            onClick={() => setShowWelcome(false)}
+            onClick={() => {
+              setShowWelcome(false);
+              localStorage.removeItem('show_welcome');
+            }}
             style={{
               background: 'none',
               border: 'none',
